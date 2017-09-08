@@ -12,11 +12,13 @@ password = 'your password'
 host = 'ftp address'  # in this case 'fileshare.drillinginfo.com'
 rmsite = 'remote target directory'  # in this case '/DI_Weekly_GDB/DI_Weekly_GDB_Full'
 
+# these variables are only used in scp_download_and_update.py and can be ignored if using ftplib
+# more details here https://winscp.net/eng/docs/
 protocol = 'ftp'  # 'connection protocol'   eg. ftp, sftp
 WinSCPloc = "C:\Program Files (x86)\WinSCP\WinSCP.com"
-ProxyMethod = 3
+ProxyMethod = 3  # this is HTTP. Other methods defined at https://winscp.net/eng/docs/rawsettings
 ProxyHost = 'your proxy host'
-ProxyPort = 8080
+ProxyPort = 'your proxy port'
 
 # This is the command used to open WinSCP and use it to connect to the remote server.
 # More details can be found here https://winscp.net/eng/docs/scripting
