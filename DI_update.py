@@ -5,7 +5,7 @@
 import os
 import shutil
 import errno
-import ftp_download as download  # or scp_download if needed
+import ftp_download_and_unpack as download  # or scp_download_and_unpack if needed
 import update_master as update
 import config
 import datetime

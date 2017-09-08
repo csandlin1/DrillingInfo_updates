@@ -31,13 +31,13 @@ def unzipFiles(source, dest):
                     zipped = zipfile.ZipFile(os.path.join(source, files), 'r')
                     zipped.printdir()
                     zipped.extractall(dest)
-            except:
+            except Exception as e:
                 log.error("couldn't unzip the files")
+                log.error(e)
     return
 
 
 def download_and_unpack(destination, db_destination):
-    global conn
     downloadFiles(conn)
     unzipFiles(destination, db_destination)
     return

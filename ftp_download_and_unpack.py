@@ -34,7 +34,7 @@ def downloadFiles(path, dest):
         try:  # writes the remote file to local destination
             ftp.retrbinary("RETR " + files, open(os.path.join(dest, files), "wb").write)
             log.info("Downloaded: " + files)
-        except:
+        except ftplib.all_errors:
             log.error("File could not be downloaded " + files)
     return
 
@@ -51,7 +51,7 @@ def unzipFiles(source, dest):
                     zipped = zipfile.ZipFile(os.path.join(source, files), 'r')
                     zipped.printdir()
                     zipped.extractall(dest)  # extracts the zip files to dest folder
-            except exception as e:
+            except Exception as e:
                 log.error("couldn't unzip the files")
                 log.error(e)
     return
