@@ -20,12 +20,12 @@ def downloadFiles(path, dest):
     log.info("connected to server")
     try:
         ftp.cwd(path)  # change to correct remote folder
-        log.info("switched to" + path)
+        log.info("switched to " + path)
         os.chdir(dest)  # change to correct local folder
     except OSError:     
         pass
     except ftplib.error_perm:       
-        log.error("could not change to " + path)
+        log.error("could not change to  " + path)
         sys.exit("Ending Application")
     
     filelist = ftp.nlst()  # lists files in remote directory
@@ -33,9 +33,9 @@ def downloadFiles(path, dest):
     for files in filelist:
         try:  # writes the remote file to local destination
             ftp.retrbinary("RETR " + files, open(os.path.join(dest, files), "wb").write)
-            log.info("Downloaded: " + files)
+            log.info("Downloaded:  " + files)
         except ftplib.all_errors:
-            log.error("File could not be downloaded " + files)
+            log.error("File could not be downloaded  " + files)
     return
 
 
@@ -47,7 +47,7 @@ def unzipFiles(source, dest):
         for files in filenames:
             try:
                 if files.endswith(".zip"):  # looks only for zip files
-                    log.info("Extracting " + os.path.join(source, files))
+                    log.info("Extracting  " + os.path.join(source, files))
                     zipped = zipfile.ZipFile(os.path.join(source, files), 'r')
                     zipped.printdir()
                     zipped.extractall(dest)  # extracts the zip files to dest folder

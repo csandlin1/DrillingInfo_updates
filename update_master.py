@@ -1,6 +1,6 @@
 # this module uses arcpy to read through the file geodatabase deliveries from Drilling info and create a new file
 # geodatabase from the states listed in the dictionary below that contain features for that state,
-# in this example TX and OK.
+# this example uses TX and OK.
 import os
 import datetime
 import arcpy

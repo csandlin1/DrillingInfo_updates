@@ -11,6 +11,8 @@ user = config.user
 password = config.password
 host = config.host
 conn = config.conn
+local_destination = config.local_destination
+local_db_destination = config.local_db_destination
 
 
 def downloadFiles(connection):
