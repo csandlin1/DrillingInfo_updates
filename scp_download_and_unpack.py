@@ -1,9 +1,11 @@
 # script to retrieve files from the server and unzip them into the proper directory
 
 import os
+import sys
 import zipfile
 import subprocess
-import config
+import config_ril as config
+import datetime
 import logging
 log = logging.getLogger(__name__)
 
@@ -16,11 +18,16 @@ local_db_destination = config.local_db_destination
 
 
 def downloadFiles(connection):
-    proc = subprocess.Popen(connection)
-    proc.wait()
-    log.info("Downloaded Files")
+    log.info("Sending %s to winscp" % str(connection))
+    try:
+        proc = subprocess.Popen(connection)
+        proc.wait()
+        log.info("connected successfully")
+    except Exception as e:
+        log.error("Exception: %s" % str(e))
+        log.info("exiting program")
+        sys.exit(1)
     return
-
 
 def unzipFiles(source, dest):
     log.info(source)
@@ -35,7 +42,7 @@ def unzipFiles(source, dest):
                     zipped.extractall(dest)
             except Exception as e:
                 log.error("couldn't unzip the files")
-                log.error(e)
+                log.error("Exception: %s" % str(e))
     return
 
 

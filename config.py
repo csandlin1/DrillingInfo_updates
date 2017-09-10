@@ -22,10 +22,6 @@ ProxyPort = 'your proxy port'
 
 # This is the command used to open WinSCP and use it to connect to the remote server.
 # More details can be found here https://winscp.net/eng/docs/scripting
-conn = """%s /ini=nul /commamd \"open %s://%s:%s@%s -rawsettings ProxyMethod=%s ProxyHost=""%s"" 
-ProxyPort=%s\" \"cd %s\" \"lcd %s\" \"get * \"close\" \"exit\"""" % (WinSCPloc, protocol, user, password, host,
-                                                str(ProxyMethod), ProxyHost, str(ProxyPort), rmsite, local_destination)
-
-# print local_destination,local_archive_destination,local_db_destination,master_destination
-print"\n\n"
-print (conn)
+conn = """%s /log="%s" /ini=nul /command \"open %s://%s:%s@%s -rawsettings ProxyMethod=\"%s\" ProxyHost=\"%s\" \
+ProxyPort=%s\" \"cd %s\" \"lcd %s\" \"get *\" \"exit\"""" % (WinSCPloc, output_log, protocol, user, password, host,
+str(ProxyMethod), ProxyHost, str(ProxyPort), rmsite, local_destination)
