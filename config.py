@@ -1,4 +1,8 @@
 # all of your variables go in this file, which is called by the other scripts
+import datetime
+
+week = datetime.datetime.now().isocalendar()[1]
+output_log = "logfile_" + datetime.datetime.now().strftime("%m-%d-%y") + ".txt"
 
 # Your file locations are defined here
 local_destination = 'local download folder'  # eg 'C:\data\DI\downloads'

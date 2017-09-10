@@ -16,7 +16,7 @@ week = datetime.datetime.now().isocalendar()[1]
 
 # set up logging file (logging scheme adapted from  Stack Overflow post
 #  https://stackoverflow.com/questions/9321741/printing-to-screen-and-writing-to-a-file-at-the-same-time)
-output_log = "logfile_" + datetime.datetime.now().strftime("%m-%d-%y") + ".txt"
+output_log = config.output_log
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
                     datefmt="%m-%d %H:%M",
@@ -56,8 +56,9 @@ for files in os.listdir(local_destination):
     try:  
         shutil.move(os.path.join(local_destination, files), local_archive_destination)
         logging.info("Moving " + files)
-    except:
+    except Exception as er:
         logging.error(files + " could not be moved")
+        logging.error("Exception: %s" % str(er))
 
 
 # run script to connect to ftp site, retrieve updates and unzip to correct folder

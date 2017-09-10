@@ -5,7 +5,6 @@ import sys
 import zipfile
 import subprocess
 import config_ril as config
-import datetime
 import logging
 log = logging.getLogger(__name__)
 
