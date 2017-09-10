@@ -4,7 +4,7 @@ import os
 import sys
 import zipfile
 import subprocess
-import config_ril as config
+import config
 import logging
 log = logging.getLogger(__name__)
 
