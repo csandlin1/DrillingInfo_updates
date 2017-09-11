@@ -8,14 +8,20 @@ import errno
 import ftp_download_and_unpack as download  # or scp_download_and_unpack if needed
 import update_master as update
 import config
-import datetime
 import logging
 
-# this number is used to determine the folder in which the files will be placed
-week = datetime.datetime.now().isocalendar()[1]
+# make a directory for the logfiles
+try:
+    os.makedirs(os.path.join(os.getcwd(), "logs"))
+    print("Making logging directory")
+except OSError as e:
+    print("logs directory exists")
+    if e.errno != errno.EEXIST:
+        raise
 
-# set up logging file (logging scheme adapted from  Stack Overflow post
-#  https://stackoverflow.com/questions/9321741/printing-to-screen-and-writing-to-a-file-at-the-same-time)
+
+# set up logging(scheme adapted from  Stack Overflow post
+# https://stackoverflow.com/questions/9321741/printing-to-screen-and-writing-to-a-file-at-the-same-time)
 output_log = config.output_log
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
@@ -38,7 +44,7 @@ local_destination = config.local_destination
 local_archive_destination = config.local_archive_destination
 local_db_destination = config.local_db_destination
 master_destination = config.master_destination
-
+connection = config.conn
 
 def check_dir_exists(path):
     try:
@@ -64,7 +70,7 @@ for files in os.listdir(local_destination):
 # run script to connect to ftp site, retrieve updates and unzip to correct folder
 check_dir_exists(local_db_destination)
 download.download_and_unpack(local_destination, local_db_destination)
-logging.info("Finished with download and unpack")
+logging.info("DI files unpacked")
 
 # run script to process incoming databases and update master files
 update.updatenow(local_db_destination, master_destination)

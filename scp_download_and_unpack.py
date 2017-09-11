@@ -4,20 +4,14 @@ import os
 import sys
 import zipfile
 import subprocess
-import config
 import logging
+import config
 log = logging.getLogger(__name__)
 
-user = config.user
-password = config.password
-host = config.host
-conn = config.conn
-local_destination = config.local_destination
-local_db_destination = config.local_db_destination
-
+connection = config.conn
 
 def downloadFiles(connection):
-    log.info("Sending %s to winscp" % str(connection))
+    log.info("Sending command to winscp")
     try:
         proc = subprocess.Popen(connection)
         proc.wait()
@@ -27,6 +21,7 @@ def downloadFiles(connection):
         log.info("exiting program")
         sys.exit(1)
     return
+
 
 def unzipFiles(source, dest):
     log.info(source)
@@ -45,7 +40,8 @@ def unzipFiles(source, dest):
     return
 
 
+# function called from main script
 def download_and_unpack(destination, db_destination):
-    downloadFiles(conn)
+    downloadFiles(connection)
     unzipFiles(destination, db_destination)
     return

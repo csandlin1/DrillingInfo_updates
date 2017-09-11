@@ -4,17 +4,15 @@
 import os
 import datetime
 import arcpy
+import config
 import logging
 log = logging.getLogger(__name__)
 
 arcpy.env.overwriteOutput = True
-
+state_dict = config.state_dict
 
 def updatenow(inPath, outPath):
     log.info(str(datetime.datetime.now()))
-
-    # dictionary to define query parameters and geodatabase filename
-    state_dict = {"Texas": {"abbrev": "TX", "filename": "DI_TX.gdb"}, "Oklahoma": {"abbrev": "OK", "filename":"DI_OK.gdb"}}
 
     # check if output database(s) exists and if not, make it
     for fn in state_dict:

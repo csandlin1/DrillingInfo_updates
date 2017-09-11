@@ -2,7 +2,11 @@
 import datetime
 
 week = datetime.datetime.now().isocalendar()[1]
-output_log = "logfile_" + datetime.datetime.now().strftime("%m-%d-%y") + ".txt"
+output_log = "logs/logfile_%s.txt" % datetime.datetime.now().strftime("%m-%d-%y-%H%M")
+winscp_log = "logs/winscp_%s.txt" % datetime.datetime.now().strftime("%m-%d-%y-%H%M")
+
+# dictionary to define query parameters and geodatabase filename(s)
+state_dict = {"Texas": {"abbrev": "TX", "filename": "DI_TX.gdb"}, "Oklahoma": {"abbrev": "OK", "filename": "DI_OK.gdb"}}
 
 # Your file locations are defined here
 local_destination = 'local download folder'  # eg 'C:\data\DI\downloads'
