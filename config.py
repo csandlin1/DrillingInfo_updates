@@ -21,6 +21,7 @@ host = 'ftp address'  # in this case 'fileshare.drillinginfo.com'
 rmsite = 'remote target directory'  # in this case '/DI_Weekly_GDB/DI_Weekly_GDB_Full'
 
 # these variables are only used in scp_download_and_update.py and can be ignored if using ftplib
+# LEAVE UNUSED PARAMETERS BLANK ("") IF YOU DON'T NEED THEM IN THE COMMAND
 # more details here https://winscp.net/eng/docs/
 protocol = 'ftp'  # 'connection protocol'   eg. ftp, sftp
 WinSCPloc = "C:\Program Files (x86)\WinSCP\WinSCP.com"
@@ -30,6 +31,11 @@ ProxyPort = 'your proxy port'
 
 # This is the command used to open WinSCP and use it to connect to the remote server.
 # More details can be found here https://winscp.net/eng/docs/scripting
-conn = """%s /log="%s" /ini=nul /command \"open %s://%s:%s@%s -rawsettings ProxyMethod=\"%s\" ProxyHost=\"%s\" \
-ProxyPort=%s\" \"cd %s\" \"lcd %s\" \"get *\" \"exit\"""" % (WinSCPloc, output_log, protocol, user, password, host,
-str(ProxyMethod), ProxyHost, str(ProxyPort), rmsite, local_destination)
+conn = "%s /log=\"%s\" /ini=nul /command \"open %s://%s:%s@%s -rawsettings" % (WinSCPloc, winscp_log, protocol, user, password, host)
+if ProxyMethod != "":
+    conn += " ProxyMethod=\"%s\"" % str(ProxyMethod)
+if ProxyHost != "":
+    conn += " ProxyHost=\"%s\"" % ProxyHost
+if ProxyPort != "":
+    conn += " ProxyPort=%s" % str(ProxyPort)
+conn += "\"  \"cd %s\" \"lcd %s\" \"get *\" \"exit\"" % (rmsite, local_destination)
