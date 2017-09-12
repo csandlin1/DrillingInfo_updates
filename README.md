@@ -8,6 +8,6 @@ Usage
 
 In order to make this set of scripts easier to customize for your own use, 
 I've moved the file location and server variables into a separate configuarion file, config.py.
-Depending on your ftp connection, you may use either ftp_download_and_unpack.py or scp-download_and_unpack.py.
+Depending on your ftp connection, you may use either ftp_download_and_unpack.py or scp-download_and_unpack.py by importing the correct module into DI_update.py.
 Information on ftplib can be found **[here](https://docs.python.org/2/library/ftplib.html)**, and you can learn more
- about WinSCP **[here](https://winscp.net/eng/docs/introduction)**.
+ about WinSCP **[here](https://winscp.net/eng/docs/introduction)**. 
